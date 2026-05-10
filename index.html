@@ -98,19 +98,38 @@
                     </a>
                 </div>
 
+                <!-- PC 유저를 위한 QR코드 안내 영역 (버튼 위로 이동) -->
+                <div class="bg-white border border-gray-200 shadow-sm rounded-[20px] p-5 flex items-center gap-5 w-full lg:w-[480px] mb-6">
+                    <div class="w-[70px] h-[70px] flex-shrink-0 bg-white border border-gray-100 rounded-xl overflow-hidden p-1">
+                        <!-- QR 코드 이미지 (채팅방 링크 자동 생성 API 사용) -->
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://pf.kakao.com/_lxcsKX/chat" alt="카카오톡 채널 QR코드" class="w-full h-full object-contain">
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-[#111] text-[15px] mb-1 flex items-center gap-1.5">
+                            <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                            PC 화면이신가요?
+                        </h4>
+                        <p class="text-[13px] text-gray-500 leading-snug">
+                            스마트폰 기본 카메라로 <b>QR을 찍으시면</b><br>
+                            아이디/비번 칠 필요 없이 <b>바로 카톡으로 연결됩니다!</b>
+                        </p>
+                    </div>
+                </div>
+
                 <!-- 채팅 시작하기 버튼 -->
-                <a href="http://pf.kakao.com/_lxcsKX/chat" target="_blank" onmouseenter="playDoongSound()" class="w-full lg:w-[480px] bg-kakao hover:bg-[#f4dc00] transition-colors rounded-[20px] py-6 px-6 flex items-center justify-center shadow-md cursor-pointer group mb-5">
+                <a href="http://pf.kakao.com/_lxcsKX/chat" target="_blank" onmouseenter="playDoongSound()" class="w-full lg:w-[480px] bg-kakao hover:bg-[#f4dc00] transition-colors rounded-[20px] py-6 px-6 flex items-center justify-center shadow-md cursor-pointer group mb-4">
                     <div class="bg-black text-kakao rounded-full w-[36px] h-[36px] flex items-center justify-center font-black text-[15px] mr-4 relative group-hover:scale-110 transition-transform">
                         Ch
                         <div class="absolute -bottom-0.5 -right-0.5 bg-white text-black text-[11px] font-bold w-[16px] h-[16px] rounded-full flex items-center justify-center pb-[1px]">+</div>
                     </div>
                     <span class="text-[#111] font-black text-[24px] tracking-tight">채팅 시작하기 &nbsp; <span class="font-light">&gt;</span></span>
                 </a>
-                <p class="text-[15px] text-gray-500 text-center lg:text-left w-full lg:w-[480px] tracking-tight">지금 채팅을 시작하고 빠른 상담을 경험해보세요!</p>
+                <p class="text-[15px] text-gray-500 text-center lg:text-left w-full lg:w-[480px] tracking-tight mb-8">지금 채팅을 시작하고 빠른 상담을 경험해보세요!</p>
+
             </div>
 
             <!-- 오른쪽 그래픽 영역 (CSS로 똑같이 구현한 프로필/채팅창) -->
-            <div class="hidden lg:block relative w-[420px] h-[650px] flex-shrink-0">
+            <div class="hidden lg:block relative w-[420px] h-[650px] flex-shrink-0 mt-8 lg:mt-0">
                 
                 <!-- 상단 프로필 카드 -->
                 <div class="absolute top-4 right-0 w-[360px] bg-white rounded-[32px] shadow-[0_20px_50px_rgb(0,0,0,0.08)] p-7 z-20 float-anim-1">
