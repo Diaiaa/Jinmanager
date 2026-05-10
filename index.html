@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이스타 진매니저 - 카카오톡 비즈니스 채널</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #fafbfc;
+            margin: 0;
+            padding: 0;
+        }
+        /* 우측 카드 둥둥 떠있는 애니메이션 효과 */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        .float-anim-1 { animation: float 6s ease-in-out infinite; }
+        .float-anim-2 { animation: float 7s ease-in-out infinite 1s; }
+        
+        .bg-kakao { background-color: #FEE500; }
+        .text-kakao { color: #FEE500; }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+    <!-- 전체 래퍼 -->
+    <div class="min-h-screen w-full flex justify-center items-center relative py-12 lg:py-0">
+        
+        <!-- 배경 장식 (말풍선 느낌의 동그라미들) -->
+        <div class="absolute top-20 left-10 w-32 h-32 bg-gray-100 rounded-full opacity-50 -z-10 blur-xl"></div>
+        <div class="absolute bottom-10 right-20 w-64 h-64 bg-[#fff9c4] rounded-full opacity-40 -z-10 blur-3xl"></div>
+
+        <div class="max-w-[1100px] w-full px-6 lg:px-10 flex flex-col lg:flex-row items-center gap-16 z-10">
+            
+            <!-- 왼쪽 텍스트 및 버튼 영역 -->
+            <div class="flex-1 flex flex-col items-start w-full">
+                
+                <!-- 카카오톡 비즈니스 채널 뱃지 -->
+                <div class="flex items-center gap-2 mb-6">
+                    <div class="bg-kakao rounded-full w-[34px] h-[34px] flex items-center justify-center font-black text-[#111] text-[15px] relative">
+                        Ch
+                        <div class="absolute -bottom-0.5 -right-0.5 bg-black text-white text-[10px] font-bold w-[15px] h-[15px] rounded-full flex items-center justify-center pb-[1px]">+</div>
+                    </div>
+                    <span class="text-gray-600 font-medium text-lg tracking-tight">카카오톡 비즈니스 채널</span>
+                </div>
+
+                <!-- 메인 타이틀 -->
+                <h1 class="text-[44px] sm:text-[56px] lg:text-[64px] font-black text-[#111] leading-tight tracking-[-0.03em] mb-3">
+                    이스타 진매니저
+                </h1>
+                <h2 class="text-[24px] sm:text-[30px] lg:text-[34px] font-bold mb-6 text-[#222] tracking-tight">
+                    빠른 상담 · <span class="text-kakao drop-shadow-sm">24시간 채팅 상담</span>
+                </h2>
+                
+                <p class="text-gray-600 text-lg sm:text-[20px] mb-12 leading-relaxed tracking-tight">
+                    게임 관련 문의는 이스타 진매니저 채널에서<br class="hidden sm:block">
+                    빠르고 편리하게 상담받으세요!
+                </p>
+
+                <!-- 4개 특징 그리드 -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 w-full">
+                    <!-- 1. 채팅 시작 -->
+                    <a href="http://pf.kakao.com/_lxcsKX/chat" target="_blank" onmouseenter="playDoongSound()" class="bg-white border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-[24px] p-5 flex flex-col items-center text-center hover:-translate-y-1 transition duration-300 cursor-pointer">
+                        <div class="w-14 h-14 bg-kakao rounded-full flex items-center justify-center font-black text-2xl mb-4 relative text-[#111]">
+                            Ch
+                            <div class="absolute -bottom-1 -right-1 bg-black text-white text-[12px] font-bold w-6 h-6 rounded-full flex items-center justify-center pb-[1px]">+</div>
+                        </div>
+                        <h3 class="font-bold text-[16px] text-[#111] mb-1.5">채팅 시작</h3>
+                        <p class="text-[12px] text-gray-500 break-keep leading-snug">간편하게 채팅 시작하고<br>소식을 받아보세요</p>
+                    </a>
+                    <!-- 2. 1:1 문의 -->
+                    <a href="http://pf.kakao.com/_lxcsKX/chat" target="_blank" onmouseenter="playDoongSound()" class="bg-white border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-[24px] p-5 flex flex-col items-center text-center hover:-translate-y-1 transition duration-300 cursor-pointer">
+                        <div class="w-14 h-14 mb-4 flex items-center justify-center">
+                            <svg class="w-11 h-11 text-[#222]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
+                        </div>
+                        <h3 class="font-bold text-[16px] text-[#111] mb-1.5">1:1 문의</h3>
+                        <p class="text-[12px] text-gray-500 break-keep leading-snug">궁금한 점을<br>1:1로 문의하세요</p>
+                    </a>
+                    <!-- 3. 빠른 응대 -->
+                    <a href="http://pf.kakao.com/_lxcsKX/chat" target="_blank" onmouseenter="playDoongSound()" class="bg-white border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-[24px] p-5 flex flex-col items-center text-center hover:-translate-y-1 transition duration-300 cursor-pointer">
+                        <div class="w-14 h-14 mb-4 flex items-center justify-center">
+                            <svg class="w-11 h-11 text-[#222]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </div>
+                        <h3 class="font-bold text-[16px] text-[#111] mb-1.5">빠른 응대</h3>
+                        <p class="text-[12px] text-gray-500 break-keep leading-snug">신속하고 정확한<br>답변을 드립니다</p>
+                    </a>
+                    <!-- 4. 링크 공유 -->
+                    <a href="http://pf.kakao.com/_lxcsKX/chat" target="_blank" onmouseenter="playDoongSound()" class="bg-white border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-[24px] p-5 flex flex-col items-center text-center hover:-translate-y-1 transition duration-300 cursor-pointer">
+                        <div class="w-14 h-14 mb-4 flex items-center justify-center">
+                            <svg class="w-11 h-11 text-[#222]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path></svg>
+                        </div>
+                        <h3 class="font-bold text-[16px] text-[#111] mb-1.5">링크 공유 가능</h3>
+                        <p class="text-[12px] text-gray-500 break-keep leading-snug">채널 링크를 공유하고<br>함께 이용해보세요</p>
+                    </a>
+                </div>
+
+                <!-- 채팅 시작하기 버튼 -->
+                <a href="http://pf.kakao.com/_lxcsKX/chat" target="_blank" onmouseenter="playDoongSound()" class="w-full lg:w-[480px] bg-kakao hover:bg-[#f4dc00] transition-colors rounded-[20px] py-6 px-6 flex items-center justify-center shadow-md cursor-pointer group mb-5">
+                    <div class="bg-black text-kakao rounded-full w-[36px] h-[36px] flex items-center justify-center font-black text-[15px] mr-4 relative group-hover:scale-110 transition-transform">
+                        Ch
+                        <div class="absolute -bottom-0.5 -right-0.5 bg-white text-black text-[11px] font-bold w-[16px] h-[16px] rounded-full flex items-center justify-center pb-[1px]">+</div>
+                    </div>
+                    <span class="text-[#111] font-black text-[24px] tracking-tight">채팅 시작하기 &nbsp; <span class="font-light">&gt;</span></span>
+                </a>
+                <p class="text-[15px] text-gray-500 text-center lg:text-left w-full lg:w-[480px] tracking-tight">지금 채팅을 시작하고 빠른 상담을 경험해보세요!</p>
+            </div>
+
+            <!-- 오른쪽 그래픽 영역 (CSS로 똑같이 구현한 프로필/채팅창) -->
+            <div class="hidden lg:block relative w-[420px] h-[650px] flex-shrink-0">
+                
+                <!-- 상단 프로필 카드 -->
+                <div class="absolute top-4 right-0 w-[360px] bg-white rounded-[32px] shadow-[0_20px_50px_rgb(0,0,0,0.08)] p-7 z-20 float-anim-1">
+                    <!-- 프로필 상단 -->
+                    <div class="flex items-center gap-5 mb-7 border-b border-gray-100 pb-7 relative">
+                        <!-- 가상의 프로필 사진 (디자인 느낌 살림) -->
+                        <div class="w-[72px] h-[72px] bg-gradient-to-br from-gray-700 to-gray-900 rounded-full flex items-center justify-center text-4xl shadow-inner flex-shrink-0">
+                            👩🏻‍💼
+                        </div>
+                        <div>
+                            <h3 class="font-black text-[22px] mb-1 text-[#111]">이스타 진매니저</h3>
+                            <p class="text-[15px] text-gray-500">친구 1</p>
+                        </div>
+                        <!-- 노란색 상담중 뱃지 -->
+                        <div class="absolute top-0 right-0 bg-[#fff5b1] text-gray-800 text-[11px] font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-sm">
+                            <div class="w-1.5 h-1.5 bg-green-500 rounded-full"></div>채팅 상담중<br>24시간
+                        </div>
+                    </div>
+                    <!-- 하단 메뉴 -->
+                    <div class="flex flex-col gap-6">
+                        <div class="flex items-start gap-4">
+                            <svg class="w-6 h-6 text-gray-500 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
+                            <div>
+                                <h4 class="font-bold text-[15px] text-[#111]">1:1 채팅 상담</h4>
+                                <p class="text-[13px] text-gray-500 mt-0.5">빠른 답변을 받아보세요</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <svg class="w-6 h-6 text-gray-500 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"></path></svg>
+                            <div>
+                                <h4 class="font-bold text-[15px] text-[#111]">공지 및 혜택</h4>
+                                <p class="text-[13px] text-gray-500 mt-0.5">이벤트, 쿠폰 등 다양한 소식</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 하단 채팅 화면 카드 -->
+                <div class="absolute bottom-4 left-0 w-[360px] bg-[#e6edf5] rounded-[32px] shadow-[0_20px_50px_rgb(0,0,0,0.15)] overflow-hidden z-10 flex flex-col h-[480px] float-anim-2 border border-white">
+                    <!-- 채팅방 헤더 -->
+                    <div class="px-5 py-4 flex items-center justify-between z-10 border-b border-white/40">
+                        <div class="flex items-center gap-3">
+                            <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                            <div class="w-9 h-9 bg-gradient-to-br from-gray-700 to-gray-900 rounded-full flex items-center justify-center text-sm overflow-hidden shadow-sm">👩🏻‍💼</div>
+                            <span class="font-bold text-[16px] text-[#111]">이스타 진매니저</span>
+                        </div>
+                        <div class="flex items-center gap-4 text-gray-600">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                        </div>
+                    </div>
+                    
+                    <!-- 채팅 내용 영역 -->
+                    <div class="flex-1 px-5 py-4 flex flex-col gap-4 overflow-y-auto">
+                        <!-- 매니저 채팅 -->
+                        <div class="flex gap-2.5 items-start">
+                            <div class="w-9 h-9 bg-gradient-to-br from-gray-700 to-gray-900 rounded-full flex-shrink-0 flex items-center justify-center text-sm shadow-sm">👩🏻‍💼</div>
+                            <div class="flex flex-col items-start gap-1 mt-1">
+                                <div class="bg-white px-4 py-3 rounded-[20px] rounded-tl-sm text-[14px] shadow-sm text-[#111] leading-relaxed">
+                                    안녕하세요!<br>이스타 진매니저입니다 😊<br>무엇을 도와드릴까요?
+                                </div>
+                                <span class="text-[11px] text-gray-500 ml-1">오전 10:48</span>
+                            </div>
+                        </div>
+                        
+                        <!-- 내 채팅 -->
+                        <div class="flex gap-2.5 items-end justify-end mt-2">
+                            <div class="flex flex-col items-end gap-1">
+                                <div class="bg-kakao px-4 py-3 rounded-[20px] rounded-tr-sm text-[14px] shadow-sm text-[#111]">
+                                    게임 관련 문의드립니다!
+                                </div>
+                                <span class="text-[11px] text-gray-500 mr-1">오전 10:49</span>
+                            </div>
+                        </div>
+                        
+                        <!-- 매니저 답변 -->
+                        <div class="flex gap-2.5 items-start mt-2">
+                            <div class="w-9 h-9 bg-gradient-to-br from-gray-700 to-gray-900 rounded-full flex-shrink-0 flex items-center justify-center text-sm shadow-sm">👩🏻‍💼</div>
+                            <div class="flex flex-col items-start gap-1 mt-1">
+                                <div class="bg-white px-4 py-3 rounded-[20px] rounded-tl-sm text-[14px] shadow-sm text-[#111] leading-relaxed">
+                                    네! 확인 후 빠르게<br>안내해드리겠습니다 😊
+                                </div>
+                                <span class="text-[11px] text-gray-500 ml-1">오전 10:50</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 입력창 영역 -->
+                    <div class="bg-white p-4 flex items-center gap-3">
+                        <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                        <div class="flex-1 bg-[#f0f2f5] rounded-full h-10 flex items-center px-4 text-[14px] text-gray-400">
+                            메시지 입력
+                        </div>
+                        <!-- 전송 버튼 (카카오 스타일) -->
+                        <div class="w-10 h-10 bg-kakao rounded-full flex items-center justify-center">
+                            <svg class="w-5 h-5 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- 둥둥 사운드 재생 스크립트 -->
+    <script>
+        let audioCtx = null;
+
+        function initAudio() {
+            if (!audioCtx) {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                audioCtx = new AudioContext();
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+        }
+
+        function playSingleDoong(delay) {
+            if (!audioCtx) return;
+            const osc = audioCtx.createOscillator();
+            const gainNode = audioCtx.createGain();
+
+            osc.type = 'sine'; // 맑은 소리
+            // 맑고 청량한 느낌을 위해 주파수를 700Hz에서 300Hz로 떨어지게 수정
+            osc.frequency.setValueAtTime(700, audioCtx.currentTime + delay);
+            osc.frequency.exponentialRampToValueAtTime(300, audioCtx.currentTime + delay + 0.2); 
+
+            gainNode.gain.setValueAtTime(0, audioCtx.currentTime + delay);
+            // 아주 작게 들리도록 볼륨(gain)을 0.5에서 0.04로 대폭 낮춤
+            gainNode.gain.linearRampToValueAtTime(0.04, audioCtx.currentTime + delay + 0.02);
+            gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + delay + 0.2);
+
+            osc.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+
+            osc.start(audioCtx.currentTime + delay);
+            osc.stop(audioCtx.currentTime + delay + 0.2);
+        }
+
+        function playDoongSound() {
+            try {
+                initAudio();
+                playSingleDoong(0); // 한 번만 재생되도록 수정
+            } catch (e) {
+                console.error("사운드 재생 실패:", e);
+            }
+        }
+
+        // 크롬 등 최신 브라우저 정책상 화면을 한 번 클릭/터치해야 오디오가 활성화됩니다.
+        document.body.addEventListener('click', initAudio, { once: true });
+        document.body.addEventListener('touchstart', initAudio, { once: true });
+    </script>
+</body>
+</html>
