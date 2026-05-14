@@ -133,6 +133,31 @@
             </button>
             
             <p class="mt-6 text-sm text-gray-500">클릭 시 카카오톡 앱으로 자동 연결됩니다.</p>
+
+            <!-- 라이브 현황 및 조회수 배너 -->
+            <div class="mt-8 bg-gray-900/60 backdrop-blur-md border border-gray-700/50 rounded-full py-3 px-6 w-full max-w-lg flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-sm shadow-xl transition-all">
+                <!-- LIVE 뱃지 및 상담중 -->
+                <div class="flex items-center space-x-2">
+                    <span class="bg-red-500/10 text-red-400 border border-red-500/30 px-2.5 py-0.5 rounded-full text-xs font-bold flex items-center shadow-[0_0_8px_rgba(239,68,68,0.2)]">
+                        <span class="w-1.5 h-1.5 bg-red-500 rounded-full mr-1.5 animate-pulse"></span>LIVE
+                    </span>
+                    <span class="text-gray-300">현재 상담중 <strong id="liveCount" class="text-white text-base mx-0.5 transition-colors duration-300">0</strong> 명</span>
+                </div>
+                
+                <span class="text-gray-600 hidden sm:inline">|</span>
+                
+                <!-- 오늘 조회 -->
+                <div class="flex items-center">
+                    <span class="text-gray-300">오늘 조회 <strong id="todayViews" class="text-white text-base mx-0.5">0</strong> 회</span>
+                </div>
+
+                <span class="text-gray-600 hidden sm:inline">|</span>
+
+                <!-- 누적 조회 -->
+                <div class="flex items-center">
+                    <span class="text-gray-300">누적 조회수 <strong id="totalViews" class="text-white text-base mx-0.5">0</strong> 회</span>
+                </div>
+            </div>
         </div>
     </main>
 
@@ -321,6 +346,137 @@
         document.getElementById('qrModal').addEventListener('click', function(e) {
             if (e.target === this) {
                 closeQRCode();
+            }
+        });
+
+        // ==========================================
+        // 1. 현재 상담중 (1~6명) 15초 랜덤 유지 로직
+        // ==========================================
+        function updateLiveConsultationCount() {
+            // 새로고침해도 15초 동안은 동일한 값이 나오도록 시간을 15000ms 단위로 나눈 청크(Chunk) 사용
+            const timeChunk = Math.floor(Date.now() / 15000);
+            
+            // 청크 값을 이용해 난수 생성 (항상 같은 시간대에는 같은 값 도출)
+            const x = Math.sin(timeChunk) * 10000;
+            const count = Math.floor((x - Math.floor(x)) * 6) + 1; // 1~6명
+            
+            const countElement = document.getElementById('liveCount');
+            if (countElement.textContent !== count.toString()) {
+                countElement.textContent = count;
+                // 값이 바뀔 때 텍스트 색상 깜빡임 효과
+                countElement.classList.add('text-green-400');
+                setTimeout(() => countElement.classList.remove('text-green-400'), 500);
+            }
+        }
+        updateLiveConsultationCount(); // 로드 시 즉시 실행
+        setInterval(updateLiveConsultationCount, 1000); // 1초마다 확인하지만 실제 변경은 15초 주기로 발생
+    </script>
+
+    <!-- ==========================================
+         2. 파이어베이스 조회수 연결 로직
+         ========================================== -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, onAuthStateChanged, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // 파이어베이스 설정 (미리보기 환경 & 실제 호스팅 환경 자동 분기)
+        let firebaseConfig;
+        let isPreviewEnv = false;
+        
+        if (typeof __firebase_config !== 'undefined') {
+            // 현재 우측 미리보기(Canvas) 환경인 경우 자동으로 로드
+            firebaseConfig = JSON.parse(__firebase_config);
+            isPreviewEnv = true;
+        } else {
+            // ⚠️ 실제 사용자님의 사이트에 코드를 올리실 때는 
+            // 이 부분을 jinn-c154f 프로젝트 설정값으로 채워주세요!
+            firebaseConfig = {
+                // apiKey: "사용자님의_API_KEY",
+                // authDomain: "jinn-c154f.firebaseapp.com",
+                // projectId: "jinn-c154f",
+                // storageBucket: "jinn-c154f.appspot.com",
+                // ...
+            };
+        }
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        // Firestore 경로 설정
+        let statsRef;
+        if (isPreviewEnv) {
+            // 미리보기 환경 규칙 적용 (안전한 테스트용)
+            const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+            statsRef = doc(db, 'artifacts', appId, 'public', 'data', 'gameshop_public_stats', 'view_stats');
+        } else {
+            // 캡처본에 있던 실제 사용자님의 DB 규칙 경로
+            statsRef = doc(db, 'gameshop_public_stats', 'view_stats');
+        }
+
+        // 한국 시간(KST) 기준 날짜(YYYY-MM-DD) 가져오기
+        const getKSTDateStr = () => {
+            const now = new Date();
+            const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+            const kstTime = new Date(utc + (9 * 3600000)); // +9시간
+            return kstTime.toISOString().split('T')[0];
+        };
+
+        const processViews = async (user) => {
+            if (!user) return;
+            const dateStr = getKSTDateStr();
+            
+            try {
+                const docSnap = await getDoc(statsRef);
+                let todayViews = 0;
+                let totalViews = 0;
+
+                if (docSnap.exists()) {
+                    const data = docSnap.data();
+                    totalViews = data.totalViews || 0;
+                    
+                    if (data.lastDate === dateStr) {
+                        todayViews = data.todayViews || 0;
+                    } else {
+                        todayViews = 0; // 날짜가 다르면 오늘 조회수 0으로 리셋
+                    }
+                }
+
+                // 새로고침 시 조회수 무한 증가 방지 (세션 스토리지 활용 - 창 닫을때까지 1번만)
+                if (!sessionStorage.getItem('has_viewed_today')) {
+                    totalViews++;
+                    todayViews++;
+                    await setDoc(statsRef, {
+                        totalViews: totalViews,
+                        todayViews: todayViews,
+                        lastDate: dateStr
+                    }, { merge: true });
+                    sessionStorage.setItem('has_viewed_today', 'true');
+                }
+
+                // 화면에 조회수 텍스트 업데이트
+                document.getElementById('todayViews').textContent = todayViews.toLocaleString();
+                document.getElementById('totalViews').textContent = totalViews.toLocaleString();
+
+            } catch(error) {
+                console.error("Firebase 연동 오류:", error);
+            }
+        };
+
+        // Firebase Auth 초기화
+        const initAuth = async () => {
+            if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                await signInWithCustomToken(auth, __initial_auth_token);
+            } else {
+                await signInAnonymously(auth);
+            }
+        };
+        
+        initAuth();
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                processViews(user);
             }
         });
     </script>
